@@ -1,0 +1,41 @@
+<style>
+  .whatsapp-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 4px;
+    font-family: Arial, sans-serif;
+    transition: background-color 0.3s;
+  }
+
+  .whatsapp-button:hover {
+    background-color: #45a049;
+  }
+</style>
+
+<div>
+  <a class="whatsapp-button" onclick="redirectToWhatsApp()">Buy on WhatsApp</a>
+</div>
+
+<script>
+  function redirectToWhatsApp() {
+    var phoneNumber = "YOUR_PHONE_NUMBER";
+    var title = document.querySelector(".post-title").innerText;
+    var description = document.querySelector(".post-body").innerText;
+    var firstImage = document.querySelector(".post-body img");
+    var imageSrc = firstImage ? firstImage.src : "";
+    var postLink = window.location.href;
+
+    var message = "Title: " + title + "\n\n";
+    message += "Description: " + description + "\n\n";
+    message += "Image: " + imageSrc + "\n\n";
+    message += "Post Link: " + postLink;
+
+    var encodedMessage = encodeURIComponent(message);
+    var whatsappUrl = "https://api.whatsapp.com/send?phone=" + phoneNumber + "&text=" + encodedMessage;
+    window.open(whatsappUrl);
+  }
+</script>
